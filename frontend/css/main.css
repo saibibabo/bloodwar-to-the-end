@@ -121,14 +121,36 @@ select.form-input{appearance:none;cursor:pointer}
 .dawn-info-label{font-size:.75rem;color:var(--text-dim);margin-top:.25rem}
 .btn-dawn{font-family:var(--font-display);font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:1rem 3rem;border:none;border-radius:10px;cursor:pointer;background:linear-gradient(135deg,var(--gold-reward),#e6a800);color:var(--bg-void);box-shadow:0 4px 30px var(--gold-glow);transition:all .3s;margin-top:1rem}
 .btn-dawn:hover{transform:translateY(-2px);box-shadow:0 8px 40px var(--gold-glow)}
+.dawn-rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:900px;margin:3rem auto 0}
+.dawn-rule-card{background:var(--bg-card);border:1px solid rgba(255,215,0,.12);border-radius:16px;padding:1.5rem;text-align:center}
+.dawn-rule-icon{font-size:2rem;margin-bottom:.75rem}
+.dawn-rule-card h4{font-family:var(--font-display);font-size:.9rem;font-weight:700;color:var(--gold-reward);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.08em}
+.dawn-rule-card p{font-size:.85rem;color:var(--text-secondary);line-height:1.6}
 .profile-header{display:flex;align-items:center;gap:2rem;margin-bottom:3rem;background:var(--bg-card);border:1px solid var(--border-dim);border-radius:20px;padding:2rem}
 .profile-avatar{width:80px;height:80px;border-radius:16px;background:linear-gradient(135deg,var(--red-hot),var(--blue-electric));display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:2rem;font-weight:900;color:#fff}
+.profile-avatar-clickable{cursor:pointer;transition:transform .2s,box-shadow .2s}
+.profile-avatar-clickable:hover{transform:scale(1.08);box-shadow:0 0 20px var(--blue-glow)}
 .profile-info h2{font-family:var(--font-display);font-size:1.5rem;font-weight:800}
 .profile-wallet{font-family:var(--font-mono);font-size:.8rem;color:var(--text-dim)}
+.profile-social-row{display:flex;gap:1.5rem;margin-top:.5rem}
+.profile-social-stat{font-size:.8rem;color:var(--text-secondary)}
+.profile-social-stat span:first-child{font-family:var(--font-mono);font-weight:700;color:var(--blue-electric)}
 .profile-stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
 .profile-stat-card{background:var(--bg-card);border:1px solid var(--border-dim);border-radius:12px;padding:1.5rem}
 .profile-stat-value{font-family:var(--font-display);font-size:1.5rem;font-weight:800}
 .profile-stat-label{font-size:.8rem;color:var(--text-dim);font-family:var(--font-display);font-weight:500;letter-spacing:.05em}
+.avatar-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem;margin-top:1rem}
+.avatar-option{width:56px;height:56px;border-radius:12px;border:2px solid var(--border-dim);background:var(--bg-panel);display:flex;align-items:center;justify-content:center;font-size:1.8rem;cursor:pointer;transition:all .2s}
+.avatar-option:hover,.avatar-option.selected{border-color:var(--blue-electric);background:rgba(0,212,255,.08);transform:scale(1.1)}
+.user-profile-modal-header{display:flex;align-items:center;gap:1rem}
+.user-profile-modal-avatar{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--red-hot),var(--blue-electric));display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.user-profile-modal-name{font-family:var(--font-display);font-size:1rem;font-weight:700}
+.user-profile-modal-wallet{font-family:var(--font-mono);font-size:.75rem;color:var(--text-dim)}
+.btn-follow{font-family:var(--font-display);font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.5rem 1.2rem;border:1px solid var(--blue-electric);border-radius:8px;cursor:pointer;background:transparent;color:var(--blue-electric);transition:all .2s}
+.btn-follow:hover,.btn-follow.following{background:var(--blue-electric);color:var(--bg-void)}
+.user-note-area{resize:vertical;min-height:80px;font-family:var(--font-body)}
+.wallet-link{color:var(--blue-electric);cursor:pointer;text-decoration:underline dotted;font-family:var(--font-mono);font-size:.8rem}
+.wallet-link:hover{color:#fff}
 .page{display:none}.page.active{display:block}
 .footer{border-top:1px solid var(--border-dim);padding:3rem 2rem;text-align:center}
 .footer-brand{font-family:var(--font-display);font-size:.9rem;font-weight:700;background:linear-gradient(135deg,var(--red-hot),var(--blue-electric));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:inline-block;margin-bottom:.5rem}

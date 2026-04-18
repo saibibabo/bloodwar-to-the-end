@@ -316,8 +316,31 @@
           </div>
           <button class="btn-dawn" onclick="dawnCheckIn()" data-i18n="btn.checkin">☀ Check In (1 U)</button>
         </div>
+        <div class="dawn-rules-grid">
+          <div class="dawn-rule-card">
+            <div class="dawn-rule-icon">☀</div>
+            <h4 data-i18n="dawn.rule1Title">Daily Check-In</h4>
+            <p data-i18n="dawn.rule1Desc">Check in between 05:00–08:00 UTC to earn on-time rewards from the pool. Late check-ins (08:00–24:00) contribute 1 U to the pool but earn reduced rewards.</p>
+          </div>
+          <div class="dawn-rule-card">
+            <div class="dawn-rule-icon">👥</div>
+            <h4 data-i18n="dawn.rule2Title">Invite &amp; Earn</h4>
+            <p data-i18n="dawn.rule2Desc">Share your invite link. Each successful referral boosts your computing power by +5% (up to +100%), increasing your share of daily pool rewards.</p>
+          </div>
+          <div class="dawn-rule-card">
+            <div class="dawn-rule-icon">💎</div>
+            <h4 data-i18n="dawn.rule3Title">Pool Distribution</h4>
+            <p data-i18n="dawn.rule3Desc">The late-fee pool is split among on-time check-ins weighted by computing power. Higher computing power = larger share. Unclaimed rewards roll to next day.</p>
+          </div>
+        </div>
         <div style="max-width:600px;margin:3rem auto">
-          <div class="form-group"><label class="form-label" data-i18n="label.inviteCode">Your Invite Code</label><div style="display:flex;gap:.5rem"><input type="text" class="form-input" id="inviteCodeDisplay" readonly data-i18n-value-placeholder="connectWallet"><button class="btn-secondary" onclick="copyInviteCode()" style="white-space:nowrap;padding:.5rem 1rem" data-i18n="btn.copy">Copy</button></div></div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="label.inviteLink">Your Invite Link</label>
+            <div style="display:flex;gap:.5rem">
+              <input type="text" class="form-input" id="inviteLinkDisplay" readonly placeholder="Connect wallet to get your link">
+              <button class="btn-secondary" onclick="copyInviteLink()" style="white-space:nowrap;padding:.5rem 1rem" data-i18n="btn.copy">Copy</button>
+            </div>
+          </div>
           <div class="form-group"><label class="form-label" data-i18n="label.enterInvite">Enter Invite Code</label><div style="display:flex;gap:.5rem"><input type="text" class="form-input" id="inviteCodeInput" data-i18n-placeholder="placeholder.inviteCode" placeholder="Code from friend"><button class="btn-primary" onclick="applyInviteCode()" style="white-space:nowrap;padding:.5rem 1.5rem" data-i18n="btn.apply">Apply</button></div></div>
         </div>
       </section>
@@ -327,8 +350,15 @@
     <div class="page" id="page-profile">
       <section class="section">
         <div class="profile-header">
-          <div class="profile-avatar" id="profileAvatar">?</div>
-          <div class="profile-info"><h2 id="profileName" data-i18n="profile.anonymous">Anonymous Warrior</h2><div class="profile-wallet" id="profileWallet" data-i18n="profile.notConnected">Not connected</div></div>
+          <div class="profile-avatar profile-avatar-clickable" id="profileAvatar" onclick="showAvatarPicker()" title="Click to change avatar">?</div>
+          <div class="profile-info">
+            <h2 id="profileName" data-i18n="profile.anonymous">Anonymous Warrior</h2>
+            <div class="profile-wallet" id="profileWallet" data-i18n="profile.notConnected">Not connected</div>
+            <div class="profile-social-row">
+              <span class="profile-social-stat"><span id="profFollowers">0</span> <span data-i18n="stat.followers">Followers</span></span>
+              <span class="profile-social-stat"><span id="profNoted">0</span> <span data-i18n="stat.noted">Times Noted</span></span>
+            </div>
+          </div>
           <button class="btn-secondary" style="margin-left:auto" onclick="showSettingsModal()" data-i18n="btn.settings">⚙ Settings</button>
         </div>
         <div class="profile-stats-grid">
@@ -351,6 +381,38 @@
       <a href="https://bscscan.com" target="_blank" class="footer-link">BSCScan</a>
     </div>
   </footer>
+
+  <!-- Avatar Picker Modal -->
+  <div class="modal-overlay" id="avatarPickerModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeAvatarPicker()">×</button>
+      <h3 data-i18n="avatar.pick">Choose Your Avatar</h3>
+      <div class="avatar-grid" id="avatarGrid"></div>
+    </div>
+  </div>
+
+  <!-- User Profile Modal (view other users) -->
+  <div class="modal-overlay" id="userProfileModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeUserProfile()">×</button>
+      <div class="user-profile-modal-header">
+        <div class="user-profile-modal-avatar" id="upAvatar">?</div>
+        <div>
+          <div class="user-profile-modal-name" id="upName">—</div>
+          <div class="user-profile-modal-wallet" id="upWallet">—</div>
+          <div class="profile-social-row" style="margin-top:.5rem">
+            <span class="profile-social-stat"><span id="upFollowers">0</span> <span data-i18n="stat.followers">Followers</span></span>
+          </div>
+        </div>
+        <button class="btn-follow" id="upFollowBtn" onclick="toggleFollow()" style="margin-left:auto" data-i18n="btn.follow">Follow</button>
+      </div>
+      <div class="form-group" style="margin-top:1.5rem">
+        <label class="form-label" data-i18n="label.privateNote">Private Note (only you can see)</label>
+        <textarea class="form-input user-note-area" id="upNoteInput" rows="3" data-i18n-placeholder="placeholder.note" placeholder="Add a private note about this user..."></textarea>
+        <button class="btn-secondary" style="margin-top:.5rem;width:100%;justify-content:center" onclick="saveUserNote()" data-i18n="btn.saveNote">Save Note</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Settings Modal -->
   <div class="modal-overlay" id="settingsModal">

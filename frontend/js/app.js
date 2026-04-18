@@ -53,12 +53,24 @@ const TRANSLATIONS = {
     'dawn.cardTitle': 'Daily Check-In Pool', 'dawn.window': 'Window: 05:00 — 08:00 UTC',
     'dawn.onTime': 'On-Time', 'dawn.late': 'Late', 'dawn.pool': 'Pool',
     'btn.checkin': '☀ Check In (1 U)',
-    'label.inviteCode': 'Your Invite Code', 'label.enterInvite': 'Enter Invite Code',
+    'label.inviteLink': 'Your Invite Link', 'label.enterInvite': 'Enter Invite Code',
     'btn.copy': 'Copy', 'btn.apply': 'Apply',
     'placeholder.inviteCode': 'Code from friend',
     'stat.wins': 'Wins', 'stat.losses': 'Losses', 'stat.wagered': 'Total Wagered',
     'stat.netProfit': 'Net Profit', 'stat.winRate': 'Win Rate',
+    'stat.followers': 'Followers', 'stat.noted': 'Times Noted',
     'profile.anonymous': 'Anonymous Warrior', 'profile.notConnected': 'Not connected',
+    'avatar.pick': 'Choose Your Avatar',
+    'label.privateNote': 'Private Note (only you can see)',
+    'placeholder.note': 'Add a private note about this user...',
+    'btn.follow': 'Follow', 'btn.unfollow': 'Unfollow', 'btn.saveNote': 'Save Note',
+    'toast.followed': 'Now following!', 'toast.unfollowed': 'Unfollowed',
+    'toast.noteSaved': 'Note saved!', 'toast.linkCopied': 'Invite link copied!',
+    'dawn.rule1Title': 'Daily Check-In', 'dawn.rule2Title': 'Invite & Earn', 'dawn.rule3Title': 'Pool Distribution',
+    'dawn.rule1Desc': 'Check in between 05:00–08:00 UTC to earn on-time rewards from the pool. Late check-ins (08:00–24:00) contribute 1 U to the pool but earn reduced rewards.',
+    'dawn.rule2Desc': 'Share your invite link. Each successful referral boosts your computing power by +5% (up to +100%), increasing your share of daily pool rewards.',
+    'dawn.rule3Desc': 'The late-fee pool is split among on-time check-ins weighted by computing power. Higher computing power = larger share. Unclaimed rewards roll to next day.',
+    'create.feeDesc2': 'Room creator receives 1% from the platform\'s 5% fee',
     'btn.settings': '⚙ Settings',
     'settings.title': '⚙ Settings', 'label.username': 'Username',
     'label.language': 'Language', 'label.currency': 'Currency', 'btn.save': 'Save',
@@ -135,12 +147,24 @@ const TRANSLATIONS = {
     'dawn.cardTitle': '每日签到池', 'dawn.window': '时间窗口：UTC 05:00 — 08:00',
     'dawn.onTime': '准时', 'dawn.late': '迟到', 'dawn.pool': '奖池',
     'btn.checkin': '☀ 签到 (1 U)',
-    'label.inviteCode': '你的邀请码', 'label.enterInvite': '输入邀请码',
+    'label.inviteLink': '你的邀请链接', 'label.enterInvite': '输入邀请码',
     'btn.copy': '复制', 'btn.apply': '应用',
     'placeholder.inviteCode': '朋友的邀请码',
     'stat.wins': '胜场', 'stat.losses': '败场', 'stat.wagered': '总投注',
     'stat.netProfit': '净盈利', 'stat.winRate': '胜率',
+    'stat.followers': '粉丝', 'stat.noted': '被备注次数',
     'profile.anonymous': '匿名战士', 'profile.notConnected': '未连接',
+    'avatar.pick': '选择头像',
+    'label.privateNote': '私人备注（只有你能看到）',
+    'placeholder.note': '对这个用户添加私人备注...',
+    'btn.follow': '关注', 'btn.unfollow': '取消关注', 'btn.saveNote': '保存备注',
+    'toast.followed': '已关注！', 'toast.unfollowed': '已取消关注',
+    'toast.noteSaved': '备注已保存！', 'toast.linkCopied': '邀请链接已复制！',
+    'dawn.rule1Title': '每日签到', 'dawn.rule2Title': '邀请赚收益', 'dawn.rule3Title': '奖池分配',
+    'dawn.rule1Desc': '每天 UTC 05:00–08:00 签到可获得准时奖励。迟到签到（08:00–24:00）向奖池贡献 1 U 但获得较少奖励。',
+    'dawn.rule2Desc': '分享你的邀请链接。每成功邀请一人，你的算力提升 +5%（最高 +100%），增加每日奖池份额。',
+    'dawn.rule3Desc': '迟到费用奖池按算力加权分配给准时签到者。算力越高，分配越多。未领取奖励滚入次日。',
+    'create.feeDesc2': '房主从平台5%手续费中获得1%',
     'btn.settings': '⚙ 设置',
     'settings.title': '⚙ 设置', 'label.username': '用户名',
     'label.language': '语言', 'label.currency': '货币', 'btn.save': '保存',
@@ -217,12 +241,24 @@ const TRANSLATIONS = {
     'dawn.cardTitle': '每日簽到池', 'dawn.window': '時間視窗：UTC 05:00 — 08:00',
     'dawn.onTime': '準時', 'dawn.late': '遲到', 'dawn.pool': '獎池',
     'btn.checkin': '☀ 簽到 (1 U)',
-    'label.inviteCode': '你的邀請碼', 'label.enterInvite': '輸入邀請碼',
+    'label.inviteLink': '你的邀請連結', 'label.enterInvite': '輸入邀請碼',
     'btn.copy': '複製', 'btn.apply': '應用',
     'placeholder.inviteCode': '朋友的邀請碼',
     'stat.wins': '勝場', 'stat.losses': '敗場', 'stat.wagered': '總投注',
     'stat.netProfit': '淨盈利', 'stat.winRate': '勝率',
+    'stat.followers': '粉絲', 'stat.noted': '被備注次數',
     'profile.anonymous': '匿名戰士', 'profile.notConnected': '未連接',
+    'avatar.pick': '選擇頭像',
+    'label.privateNote': '私人備注（只有你能看到）',
+    'placeholder.note': '對這個用戶添加私人備注...',
+    'btn.follow': '關注', 'btn.unfollow': '取消關注', 'btn.saveNote': '儲存備注',
+    'toast.followed': '已關注！', 'toast.unfollowed': '已取消關注',
+    'toast.noteSaved': '備注已儲存！', 'toast.linkCopied': '邀請連結已複製！',
+    'dawn.rule1Title': '每日簽到', 'dawn.rule2Title': '邀請賺收益', 'dawn.rule3Title': '獎池分配',
+    'dawn.rule1Desc': '每天 UTC 05:00–08:00 簽到可獲得準時獎勵。遲到簽到（08:00–24:00）向獎池貢獻 1 U 但獲得較少獎勵。',
+    'dawn.rule2Desc': '分享你的邀請連結。每成功邀請一人，你的算力提升 +5%（最高 +100%），增加每日獎池份額。',
+    'dawn.rule3Desc': '遲到費用獎池按算力加權分配給準時簽到者。算力越高，分配越多。未領取獎勵滾入次日。',
+    'create.feeDesc2': '房主從平台5%手續費中獲得1%',
     'btn.settings': '⚙ 設定',
     'settings.title': '⚙ 設定', 'label.username': '用戶名',
     'label.language': '語言', 'label.currency': '貨幣', 'btn.save': '儲存',
@@ -687,9 +723,22 @@ async function loadUserData() {
       if (!state.user.username) {
         await assignRandomUsername();
       }
-      const icEl = document.getElementById('inviteCodeDisplay');
-      if (icEl && state.user.invite_code) icEl.value = state.user.invite_code;
+      const linkEl = document.getElementById('inviteLinkDisplay');
+      if (linkEl && state.user.invite_code) {
+        linkEl.value = `${window.location.origin}/?ref=${state.user.invite_code}`;
+      }
       updateAccountUI();
+      // Apply pending referral from invite link
+      const pendingRef = sessionStorage.getItem('pendingRefCode');
+      if (pendingRef && !state.user.invited_by) {
+        sessionStorage.removeItem('pendingRefCode');
+        const refRes = await fetch(`${CONFIG.API_URL}/users/${state.wallet}/invite`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ inviteCode: pendingRef }),
+        });
+        const refData = await refRes.json();
+        if (refData.success) toast(t('toast.inviteApplied'), 'success');
+      }
     }
   } catch (e) {}
 }
@@ -1579,10 +1628,11 @@ function renderLbRow(row) {
   }
 
   if (lbCategory === 'volume') {
-    const addr = row.username || (row.player ? `${row.player.slice(0,6)}...${row.player.slice(-4)}` : '—');
+    const display = row.username || (row.player ? `${row.player.slice(0,6)}...${row.player.slice(-4)}` : '—');
+    const playerCell = row.player ? `<span class="wallet-link" onclick="showUserProfile('${row.player}')">${display}</span>` : display;
     return `<tr>
       <td>${rankCell}</td>
-      <td style="font-family:var(--font-mono)">${addr}</td>
+      <td style="font-family:var(--font-mono)">${playerCell}</td>
       <td>${row.game_count || 0}</td>
       <td style="color:var(--blue-electric)">${formatU(row.max_single_bet || 0)}</td>
       <td style="color:var(--gold-reward)">${formatU(row.total_volume || 0)}</td>
@@ -1590,12 +1640,13 @@ function renderLbRow(row) {
   }
 
   // profit
-  const addr = row.username || (row.player ? `${row.player.slice(0,6)}...${row.player.slice(-4)}` : '—');
+  const display = row.username || (row.player ? `${row.player.slice(0,6)}...${row.player.slice(-4)}` : '—');
+  const playerCell = row.player ? `<span class="wallet-link" onclick="showUserProfile('${row.player}')">${display}</span>` : display;
   const pl = parseFloat(row.profit_loss || 0);
   const pc = pl >= 0 ? 'profit-positive' : 'profit-negative';
   return `<tr>
     <td>${rankCell}</td>
-    <td style="font-family:var(--font-mono)">${addr}</td>
+    <td style="font-family:var(--font-mono)">${playerCell}</td>
     <td>${row.wins || 0}</td>
     <td>${row.losses || 0}</td>
     <td>${row.win_rate || 0}%</td>
@@ -1617,6 +1668,11 @@ async function loadDawnData() {
       document.getElementById('dawnPool').textContent = `${parseFloat(data.data.late_pool || 0).toFixed(1)} U`;
     }
   } catch (e) {}
+  // Update invite link display
+  const linkEl = document.getElementById('inviteLinkDisplay');
+  if (linkEl && state.user?.invite_code) {
+    linkEl.value = `${window.location.origin}/?ref=${state.user.invite_code}`;
+  }
 }
 
 async function dawnCheckIn() {
@@ -1647,16 +1703,133 @@ async function loadProfile() {
     return;
   }
   updateAccountUI();
+  // Render avatar
+  const avatarEl = document.getElementById('profileAvatar');
+  if (avatarEl && state.user?.avatar) avatarEl.textContent = state.user.avatar;
   try {
-    const res = await fetch(`${CONFIG.API_URL}/users/${state.wallet}/stats`);
-    const data = await res.json();
-    if (data.success) {
-      document.getElementById('profWins').textContent = data.data.wins || 0;
-      document.getElementById('profLosses').textContent = (data.data.total_matches || 0) - (data.data.wins || 0);
-      document.getElementById('profBets').textContent = `${parseFloat(data.data.total_wagered || 0).toFixed(0)} U`;
-      document.getElementById('profProfit').textContent = `${parseFloat(data.data.total_profit || 0).toFixed(1)} U`;
+    const [statsRes, socialRes] = await Promise.all([
+      fetch(`${CONFIG.API_URL}/users/${state.wallet}/stats`),
+      fetch(`${CONFIG.API_URL}/users/${state.wallet}/social`),
+    ]);
+    const stats = await statsRes.json();
+    const social = await socialRes.json();
+    if (stats.success) {
+      document.getElementById('profWins').textContent = stats.data.wins || 0;
+      document.getElementById('profLosses').textContent = (stats.data.total_matches || 0) - (stats.data.wins || 0);
+      document.getElementById('profBets').textContent = `${parseFloat(stats.data.total_wagered || 0).toFixed(0)} U`;
+      document.getElementById('profProfit').textContent = `${parseFloat(stats.data.total_profit || 0).toFixed(1)} U`;
+    }
+    if (social.success) {
+      document.getElementById('profFollowers').textContent = social.data.follower_count || 0;
+      document.getElementById('profNoted').textContent = social.data.noted_count || 0;
     }
   } catch (e) {}
+}
+
+// =====================================================
+// AVATAR PICKER
+// =====================================================
+const AVATARS = ['⚔️','🔥','💀','🎯','🏆','👑','🦊','🐉','🌊','⚡','🎭','🦁','🌙','💎','🚀','🐺','🦅','🌀','🏴','🎪'];
+
+function showAvatarPicker() {
+  if (!state.wallet) { toast(t('toast.connectFirst'), 'error'); return; }
+  const grid = document.getElementById('avatarGrid');
+  grid.innerHTML = AVATARS.map(e =>
+    `<div class="avatar-option${state.user?.avatar === e ? ' selected' : ''}" onclick="setAvatar('${e}')">${e}</div>`
+  ).join('');
+  document.getElementById('avatarPickerModal').classList.add('open');
+}
+function closeAvatarPicker() { document.getElementById('avatarPickerModal').classList.remove('open'); }
+
+async function setAvatar(emoji) {
+  if (!state.wallet) return;
+  try {
+    const res = await fetch(`${CONFIG.API_URL}/users/${state.wallet}`, {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ avatar: emoji }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      state.user = data.data;
+      document.getElementById('profileAvatar').textContent = emoji;
+      updateAccountUI();
+      closeAvatarPicker();
+      toast('Avatar updated!', 'success');
+    }
+  } catch (e) { toast('Failed to update avatar', 'error'); }
+}
+
+// =====================================================
+// USER PROFILE MODAL (view other users)
+// =====================================================
+let _viewingWallet = null;
+
+async function showUserProfile(wallet) {
+  if (!wallet) return;
+  _viewingWallet = wallet.toLowerCase();
+  document.getElementById('userProfileModal').classList.add('open');
+  document.getElementById('upWallet').textContent = `${_viewingWallet.slice(0,6)}...${_viewingWallet.slice(-4)}`;
+  document.getElementById('upName').textContent = '...';
+  document.getElementById('upFollowers').textContent = '...';
+  document.getElementById('upFollowBtn').style.display = state.wallet && state.wallet !== _viewingWallet ? '' : 'none';
+  try {
+    const [userRes, socialRes] = await Promise.all([
+      fetch(`${CONFIG.API_URL}/users/${_viewingWallet}`),
+      fetch(`${CONFIG.API_URL}/users/${_viewingWallet}/social?viewer=${state.wallet || ''}`),
+    ]);
+    const userData = await userRes.json();
+    const socialData = await socialRes.json();
+    if (userData.success) {
+      const u = userData.data;
+      document.getElementById('upName').textContent = u.username || `${_viewingWallet.slice(0,6)}...`;
+      const av = document.getElementById('upAvatar');
+      av.textContent = u.avatar || u.username?.slice(0,2)?.toUpperCase() || '?';
+    }
+    if (socialData.success) {
+      document.getElementById('upFollowers').textContent = socialData.data.follower_count || 0;
+      const btn = document.getElementById('upFollowBtn');
+      btn.textContent = socialData.data.is_following ? t('btn.unfollow') : t('btn.follow');
+      btn.classList.toggle('following', socialData.data.is_following);
+    }
+    // Load private note if viewer
+    if (state.wallet && state.wallet !== _viewingWallet) {
+      const noteRes = await fetch(`${CONFIG.API_URL}/users/${state.wallet}/note/${_viewingWallet}`);
+      const noteData = await noteRes.json();
+      if (noteData.success) document.getElementById('upNoteInput').value = noteData.note || '';
+    }
+  } catch (e) {}
+}
+
+function closeUserProfile() {
+  document.getElementById('userProfileModal').classList.remove('open');
+  _viewingWallet = null;
+}
+
+async function toggleFollow() {
+  if (!state.wallet || !_viewingWallet) { toast(t('toast.connectFirst'), 'error'); return; }
+  try {
+    const res = await fetch(`${CONFIG.API_URL}/users/${state.wallet}/follow/${_viewingWallet}`, { method: 'POST' });
+    const data = await res.json();
+    if (data.success) {
+      const btn = document.getElementById('upFollowBtn');
+      btn.textContent = data.following ? t('btn.unfollow') : t('btn.follow');
+      btn.classList.toggle('following', data.following);
+      toast(data.following ? t('toast.followed') : t('toast.unfollowed'), 'success');
+    }
+  } catch (e) { toast('Failed', 'error'); }
+}
+
+async function saveUserNote() {
+  if (!state.wallet || !_viewingWallet) { toast(t('toast.connectFirst'), 'error'); return; }
+  const note = document.getElementById('upNoteInput').value;
+  try {
+    const res = await fetch(`${CONFIG.API_URL}/users/${state.wallet}/note/${_viewingWallet}`, {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ note }),
+    });
+    const data = await res.json();
+    if (data.success) toast(t('toast.noteSaved'), 'success');
+  } catch (e) { toast('Failed to save note', 'error'); }
 }
 
 function showSettingsModal() {
@@ -1698,9 +1871,11 @@ async function saveSettings() {
   }
 }
 
-function copyInviteCode() {
-  navigator.clipboard.writeText(document.getElementById('inviteCodeDisplay')?.value || '');
-  toast(t('toast.inviteCopied'), 'success');
+function copyInviteLink() {
+  const link = document.getElementById('inviteLinkDisplay')?.value || '';
+  if (!link) { toast(t('toast.connectFirst'), 'error'); return; }
+  navigator.clipboard.writeText(link);
+  toast(t('toast.linkCopied'), 'success');
 }
 
 async function applyInviteCode() {
@@ -1804,5 +1979,15 @@ window.addEventListener('DOMContentLoaded', () => {
     updateWalletUI();
     loadUserData();
     loadContractConfig();
+  }
+
+  // Handle ?ref= invite link
+  const refCode = new URLSearchParams(window.location.search).get('ref');
+  if (refCode) {
+    sessionStorage.setItem('pendingRefCode', refCode);
+    // Clear ref from URL without reload
+    const url = new URL(window.location);
+    url.searchParams.delete('ref');
+    window.history.replaceState({}, '', url);
   }
 });

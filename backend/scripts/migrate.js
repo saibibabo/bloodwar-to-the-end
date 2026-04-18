@@ -40,6 +40,20 @@ async function migrate() {
     const alters = [
       "ALTER TABLE rooms ADD COLUMN IF NOT EXISTS bet_limit_step_pct TINYINT DEFAULT 50",
       "ALTER TABLE room_teams ADD COLUMN IF NOT EXISTS name_set_by VARCHAR(42) NULL",
+      "ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar VARCHAR(10) DEFAULT NULL",
+      `CREATE TABLE IF NOT EXISTS user_follows (
+        follower_wallet VARCHAR(42) NOT NULL,
+        following_wallet VARCHAR(42) NOT NULL,
+        created_at DATETIME DEFAULT NOW(),
+        PRIMARY KEY (follower_wallet, following_wallet)
+      )`,
+      `CREATE TABLE IF NOT EXISTS user_notes (
+        noter_wallet VARCHAR(42) NOT NULL,
+        noted_wallet VARCHAR(42) NOT NULL,
+        note_text TEXT,
+        updated_at DATETIME DEFAULT NOW() ON UPDATE NOW(),
+        PRIMARY KEY (noter_wallet, noted_wallet)
+      )`,
     ];
     for (const stmt of alters) {
       try {
