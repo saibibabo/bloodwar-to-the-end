@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fomo Playground | Blood War to the End</title>
+  <meta name="description" content="Decentralized PK Competition Platform on BSC">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js" type="text/javascript"></script>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-orbs"></div>
+
+  <header class="header">
+    <div class="header-left">
+      <img src="assets/logo.png" alt="Logo" class="logo-img">
+      <span class="logo-text">FOMO PLAYGROUND</span>
+      <nav class="nav-links">
+        <a class="nav-link active" data-page="home" data-i18n="nav.arena">Arena</a>
+        <a class="nav-link" data-page="rooms" data-i18n="nav.rooms">Rooms</a>
+        <a class="nav-link" data-page="create" data-i18n="nav.create">Create</a>
+        <a class="nav-link" data-page="leaderboard" data-i18n="nav.rankings">Rankings</a>
+        <a class="nav-link" data-page="dawn" data-i18n="nav.dawn">Dawn</a>
+      </nav>
+    </div>
+    <div class="header-right">
+      <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-current-btn" id="langCurrentBtn" onclick="toggleLangMenu()">
+          <span class="lang-globe">🌐</span>
+          <span class="lang-current-label" id="langCurrentLabel">English</span>
+          <span class="lang-caret">▾</span>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <button class="lang-option" data-lang="en" onclick="setLanguage('en')">
+            <span class="lang-opt-check" id="check-en">✓</span>English
+          </button>
+          <button class="lang-option" data-lang="zh-CN" onclick="setLanguage('zh-CN')">
+            <span class="lang-opt-check" id="check-zh-CN"></span>简体中文
+          </button>
+          <button class="lang-option" data-lang="zh-TW" onclick="setLanguage('zh-TW')">
+            <span class="lang-opt-check" id="check-zh-TW"></span>繁體中文
+          </button>
+        </div>
+      </div>
+      <a href="https://twitter.com/" target="_blank" class="social-icon" title="Twitter">𝕏</a>
+      <a href="https://t.me/" target="_blank" class="social-icon" title="Telegram">✈</a>
+      <a href="https://discord.gg/" target="_blank" class="social-icon" title="Discord">⟐</a>
+
+      <!-- Wallet button (not connected) -->
+      <button class="btn-wallet" id="connectBtn" onclick="connectWallet()" data-i18n="btn.connect">Connect Wallet</button>
+
+      <!-- Account panel (connected) -->
+      <div class="account-wrap" id="accountWrap" style="display:none">
+        <button class="btn-wallet connected" id="accountBtn" onclick="toggleAccountDropdown()">
+          <span id="accountBtnLabel">0x...</span>
+        </button>
+        <div class="account-dropdown" id="accountDropdown">
+          <div class="acct-header">
+            <div class="acct-avatar" id="dropAvatar">?</div>
+            <div class="acct-info">
+              <div class="acct-name-row">
+                <span class="acct-username" id="dropUsername">Warrior</span>
+                <button class="btn-icon-edit" onclick="startEditUsername()" title="Edit username">✏</button>
+              </div>
+              <div class="acct-wallet" id="dropWallet">0x...</div>
+            </div>
+          </div>
+          <!-- Inline username editor -->
+          <div class="acct-edit-wrap" id="acctEditWrap" style="display:none">
+            <input type="text" class="form-input" id="newUsernameInput" data-i18n-placeholder="acct.namePlaceholder" placeholder="New username" maxlength="20">
+            <div class="acct-edit-btns">
+              <button class="btn-edit-confirm" onclick="saveUsername()" data-i18n="btn.confirm">✓ Save</button>
+              <button class="btn-edit-cancel" onclick="cancelEditUsername()" data-i18n="btn.cancel">✕</button>
+            </div>
+          </div>
+          <!-- Stats row -->
+          <div class="acct-stats">
+            <div class="acct-stat-item">
+              <div class="acct-stat-val" id="dropWins">0</div>
+              <div class="acct-stat-lbl" data-i18n="stat.wins">Wins</div>
+            </div>
+            <div class="acct-stat-item">
+              <div class="acct-stat-val" id="dropWinRate">0%</div>
+              <div class="acct-stat-lbl" data-i18n="stat.winRate">Win Rate</div>
+            </div>
+            <div class="acct-stat-item">
+              <div class="acct-stat-val" id="dropProfit">0 U</div>
+              <div class="acct-stat-lbl" data-i18n="stat.netProfit">Profit</div>
+            </div>
+          </div>
+          <!-- Actions -->
+          <div class="acct-actions">
+            <button class="btn-acct-profile" onclick="closeAccountDropdown();navigateTo('profile')" data-i18n="acct.viewProfile">Profile</button>
+            <button class="btn-acct-disconnect" onclick="disconnectWallet()" data-i18n="acct.disconnect">Disconnect</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- HOME -->
+    <div class="page active" id="page-home">
+      <section class="hero">
+        <div class="hero-badge" data-i18n="hero.badge">⚡ LIVE ON BINANCE SMART CHAIN</div>
+        <h1><span class="text-red">BLOOD</span> WAR<br>TO THE <span class="text-gold">END</span></h1>
+        <p class="hero-sub" data-i18n="hero.sub">Decentralized PK battles. Pick your side, bet your conviction. Winners take all — powered by smart contracts.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" data-page="rooms" data-i18n="hero.enterArena">⚔ Enter Arena</a>
+          <a class="btn-secondary" data-page="create" data-i18n="hero.createRoom">+ Create Room</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item"><div class="stat-value red" id="stat-rooms">0</div><div class="stat-label" data-i18n="stat.liveBattles">Live Battles</div></div>
+          <div class="stat-item"><div class="stat-value blue" id="stat-users">0</div><div class="stat-label" data-i18n="stat.warriors">Warriors</div></div>
+          <div class="stat-item"><div class="stat-value gold" id="stat-volume">0 U</div><div class="stat-label" data-i18n="stat.totalVolume">Total Volume</div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="battle-showcase">
+          <div class="section-title" style="margin-bottom:2rem" data-i18n="section.featuredBattle">⚔ Featured Battle</div>
+          <div class="battle-vs">
+            <div class="battle-side red"><div class="battle-side-label" data-i18n="team.a">TEAM A</div><div class="battle-side-pool">500 U</div><div class="battle-side-supporters" data-i18n="team.supporters12">12 supporters</div></div>
+            <div class="vs-badge">VS</div>
+            <div class="battle-side blue"><div class="battle-side-label" data-i18n="team.b">TEAM B</div><div class="battle-side-pool">700 U</div><div class="battle-side-supporters" data-i18n="team.supporters18">18 supporters</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title" data-i18n="howItWorks.title">How It Works</h2>
+        <p class="section-subtitle" data-i18n="howItWorks.sub">Three steps to enter the arena. All on-chain. All transparent.</p>
+        <div class="steps-grid">
+          <div class="step-card"><div class="step-number">01</div><div class="step-title" data-i18n="step1.title">Choose Your Battle</div><div class="step-desc" data-i18n="step1.desc">Browse active PK rooms or create your own. 1v1 duels or multiplayer chaos.</div></div>
+          <div class="step-card"><div class="step-number">02</div><div class="step-title" data-i18n="step2.title">Pick A Side & Bet</div><div class="step-desc" data-i18n="step2.desc">Support Team A or B with U tokens. Your contribution degree determines your share.</div></div>
+          <div class="step-card"><div class="step-number">03</div><div class="step-title" data-i18n="step3.title">Winners Take All</div><div class="step-desc" data-i18n="step3.desc">Smart contracts auto-settle. Winning team splits the prize pool. Only 5% fee on losers.</div></div>
+          <div class="step-card"><div class="step-number">04</div><div class="step-title" data-i18n="step4.title">Claim & Rise</div><div class="step-desc" data-i18n="step4.desc">Claim rewards instantly. Climb the leaderboard. Earn the Dawn Medal.</div></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ROOMS -->
+    <div class="page" id="page-rooms">
+      <section class="section">
+        <h2 class="section-title" data-i18n="rooms.title">⚔ Battle Arena</h2>
+        <p class="section-subtitle" data-i18n="rooms.sub">Active PK rooms awaiting warriors</p>
+        <div class="rooms-grid" id="roomsGrid"></div>
+      </section>
+    </div>
+
+    <!-- CREATE ROOM -->
+    <div class="page" id="page-create">
+      <section class="section">
+        <h2 class="section-title" data-i18n="create.title">+ Create Battle Room</h2>
+        <p class="section-subtitle" data-i18n="create.sub">Deploy a new match. Earn creator rewards.</p>
+        <div class="create-layout">
+          <!-- Left: form -->
+          <div class="form-container create-form">
+            <div class="form-group">
+              <label class="form-label" data-i18n="label.roomName">Room Name</label>
+              <input type="text" class="form-input" id="createRoomName" data-i18n-placeholder="placeholder.roomName" placeholder="e.g. The Final Showdown">
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-i18n="label.firstTeamName">First Team Name</label>
+              <input type="text" class="form-input" id="createFirstTeamName" data-i18n-placeholder="placeholder.firstTeamName" placeholder="e.g. Red Dragons" maxlength="50">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" data-i18n="label.gameMode">Game Mode</label>
+                <select class="form-input" id="createMaxTeams" onchange="onModeChange(this.value)">
+                  <option value="2" data-i18n="mode.1v1">1v1 PK</option>
+                  <option value="multi" data-i18n="mode.multi">Multiplayer</option>
+                </select>
+              </div>
+              <div class="form-group" id="multiTeamWrap" style="display:none">
+                <label class="form-label" data-i18n="label.teamCount">Teams (3–8)</label>
+                <input type="number" class="form-input" id="createTeamCount" value="3" min="3" max="8" oninput="updateFeeEstimate()">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" data-i18n="label.duration">Duration (Min)</label>
+                <input type="number" class="form-input" id="createDuration" value="30" min="5" oninput="updateFeeEstimate()">
+              </div>
+              <div class="form-group">
+                <label class="form-label">
+                  <span data-i18n="label.betLimit">Bet Limit (U)</span>
+                  <span class="form-tooltip" title="" data-i18n-title="tooltip.betLimit">ⓘ</span>
+                </label>
+                <input type="number" class="form-input" id="createBetLimit" value="100" min="1" oninput="updateFeeEstimate()">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">
+                <span data-i18n="label.betLimitStep">Bet Cap Step (%)</span>
+                <span class="form-tooltip" title="" data-i18n-title="tooltip.betLimitStep">ⓘ</span>
+              </label>
+              <input type="number" class="form-input" id="createBetLimitStep" value="50" min="20" max="100" oninput="updateFeeEstimate()">
+              <div class="form-hint" data-i18n="hint.betLimitStep">Range: 20% – 100%</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-i18n="label.tokenAddr">Token Address</label>
+              <input type="text" class="form-input" id="createTokenAddr" placeholder="0x... (leave blank for demo)">
+            </div>
+            <button class="btn-primary" style="width:100%;justify-content:center;margin-top:1rem" onclick="createRoom()" data-i18n="btn.deploy">⚡ Deploy Battle Room</button>
+          </div>
+
+          <!-- Right: platform fee info + room preview -->
+          <div class="fee-panel" id="feePanel">
+            <div class="fee-panel-title" data-i18n="create.feeInfo">💰 Platform Fees</div>
+            <div class="fee-info-block">
+              <div class="fee-info-row">
+                <span class="fee-info-pct">5%</span>
+                <span class="fee-info-desc" data-i18n="create.feeDesc1">Platform collects 5% of total pool after match settles</span>
+              </div>
+              <div class="fee-info-row fee-info-creator">
+                <span class="fee-info-pct fee-green">1%</span>
+                <span class="fee-info-desc" data-i18n="create.feeDesc2">1% of total pool rewards the room creator</span>
+              </div>
+            </div>
+            <div class="fee-divider"></div>
+            <div class="fee-preview" id="feePreview">
+              <div class="fee-preview-title" data-i18n="fee.roomPreview">Room Preview</div>
+              <div class="fee-preview-item"><span data-i18n="fee.teams">Teams</span><strong id="prevTeams">2</strong></div>
+              <div class="fee-preview-item"><span data-i18n="fee.duration">Duration</span><strong id="prevDuration">30 min</strong></div>
+              <div class="fee-preview-item"><span data-i18n="label.betLimit">Bet Cap</span><strong id="prevBetLimit">100 U</strong></div>
+              <div class="fee-preview-item"><span data-i18n="fee.maxPool">Max Prize Pool</span><strong id="prevMaxPool">200 U</strong></div>
+              <div class="fee-preview-item"><span data-i18n="label.betLimitStep">Cap Step</span><strong id="prevBetStep">50%</strong></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- BET ROOM -->
+    <div class="page" id="page-bet">
+      <section class="section">
+        <div class="bet-container">
+          <div class="bet-room-header">
+            <div class="bet-room-header-left">
+              <button class="btn-back" onclick="navigateTo('rooms')" data-i18n="btn.back">← Back</button>
+              <h2 class="section-title" id="betRoomTitle" style="margin:0">Battle Room</h2>
+            </div>
+            <span class="room-status live" id="betRoomStatus">● LIVE</span>
+          </div>
+          <div class="stage-bar" id="stageBar">
+            <span class="stage-pill" id="stagePill">RESTRICTED</span>
+            <div class="stage-countdown-wrap">
+              <div class="stage-countdown" id="stageCountdown">--:--:--</div>
+              <div class="stage-countdown-label" data-i18n="stage.remaining">REMAINING</div>
+            </div>
+            <span class="stage-limit-pill" id="stageLimitPill">MAX: 100 U</span>
+          </div>
+          <div class="time-track">
+            <div class="time-fill" id="timeFill" style="width:100%"></div>
+          </div>
+          <div class="teams-grid" id="teamsGrid">
+            <div style="text-align:center;color:var(--text-dim);padding:3rem;grid-column:1/-1" data-i18n="loading.battle">Loading battle...</div>
+          </div>
+          <div class="leader-strip" id="leaderStrip" style="display:none">
+            <span class="leader-prefix" id="leaderPrefix">⚔ LEADING:</span>
+            <span class="leader-name" id="leaderName">---</span>
+            <span class="leader-amount" id="leaderAmount">0 U</span>
+          </div>
+          <div class="bet-controls" id="betControls">
+            <label class="form-label" data-i18n="label.betAmount">Bet Amount (U)</label>
+            <input type="number" class="form-input" id="betAmountInput" data-i18n-placeholder="placeholder.betAmount" placeholder="Enter amount">
+            <div class="bet-presets">
+              <button class="bet-preset" onclick="setBetAmount(10)">10 U</button>
+              <button class="bet-preset" onclick="setBetAmount(50)">50 U</button>
+              <button class="bet-preset" onclick="setBetAmount(100)">100 U</button>
+              <button class="bet-preset" onclick="setBetAmount(500)">500 U</button>
+            </div>
+          </div>
+          <button class="btn-bet" id="placeBetBtn" onclick="placeBet()" disabled data-i18n="btn.selectTeam">Select a team first</button>
+          <button class="btn-claim" id="claimRewardBtn" onclick="claimReward()" style="display:none" data-i18n="btn.claimReward">🏆 Claim Your Reward</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- LEADERBOARD -->
+    <div class="page" id="page-leaderboard">
+      <section class="section">
+        <h2 class="section-title" data-i18n="rankings.title">🏆 Rankings</h2>
+        <div class="leaderboard-tabs" id="lbPeriodTabs">
+          <button class="lb-tab active" data-period="daily" data-i18n="tab.daily">Daily</button>
+          <button class="lb-tab" data-period="weekly" data-i18n="tab.weekly">Weekly</button>
+          <button class="lb-tab" data-period="monthly" data-i18n="tab.monthly">Monthly</button>
+          <button class="lb-tab" data-period="alltime" data-i18n="tab.alltime">All-Time</button>
+        </div>
+        <div class="leaderboard-tabs" id="lbCatTabs">
+          <button class="lb-tab active" data-cat="profit" data-i18n="cat.profit">💰 Profit</button>
+          <button class="lb-tab" data-cat="rooms" data-i18n="cat.rooms">🏟 Rooms</button>
+          <button class="lb-tab" data-cat="volume" data-i18n="cat.volume">📊 Volume</button>
+        </div>
+        <div style="overflow-x:auto"><table class="lb-table"><thead><tr id="lbHeaders"></tr></thead><tbody id="lbBody"></tbody></table></div>
+      </section>
+    </div>
+
+    <!-- DAWN -->
+    <div class="page" id="page-dawn">
+      <section class="section dawn-section">
+        <h2 class="section-title" style="color:var(--gold-reward)" data-i18n="dawn.title">🌅 The Dawn Protocol</h2>
+        <p class="section-subtitle" data-i18n="dawn.sub">Early bird check-in staking. Wake up, check in, earn rewards.</p>
+        <div class="dawn-card">
+          <h3 data-i18n="dawn.cardTitle">Daily Check-In Pool</h3>
+          <p style="color:var(--text-secondary)" data-i18n="dawn.window">Window: 05:00 — 08:00 UTC</p>
+          <div class="dawn-timer" id="dawnTimer">--:--:--</div>
+          <div class="dawn-info-grid">
+            <div class="dawn-info-item"><div class="dawn-info-value" id="dawnOnTime">23</div><div class="dawn-info-label" data-i18n="dawn.onTime">On-Time</div></div>
+            <div class="dawn-info-item"><div class="dawn-info-value" id="dawnLate">8</div><div class="dawn-info-label" data-i18n="dawn.late">Late</div></div>
+            <div class="dawn-info-item"><div class="dawn-info-value" id="dawnPool">8 U</div><div class="dawn-info-label" data-i18n="dawn.pool">Pool</div></div>
+          </div>
+          <button class="btn-dawn" onclick="dawnCheckIn()" data-i18n="btn.checkin">☀ Check In (1 U)</button>
+        </div>
+        <div style="max-width:600px;margin:3rem auto">
+          <div class="form-group"><label class="form-label" data-i18n="label.inviteCode">Your Invite Code</label><div style="display:flex;gap:.5rem"><input type="text" class="form-input" id="inviteCodeDisplay" readonly data-i18n-value-placeholder="connectWallet"><button class="btn-secondary" onclick="copyInviteCode()" style="white-space:nowrap;padding:.5rem 1rem" data-i18n="btn.copy">Copy</button></div></div>
+          <div class="form-group"><label class="form-label" data-i18n="label.enterInvite">Enter Invite Code</label><div style="display:flex;gap:.5rem"><input type="text" class="form-input" id="inviteCodeInput" data-i18n-placeholder="placeholder.inviteCode" placeholder="Code from friend"><button class="btn-primary" onclick="applyInviteCode()" style="white-space:nowrap;padding:.5rem 1.5rem" data-i18n="btn.apply">Apply</button></div></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="page" id="page-profile">
+      <section class="section">
+        <div class="profile-header">
+          <div class="profile-avatar" id="profileAvatar">?</div>
+          <div class="profile-info"><h2 id="profileName" data-i18n="profile.anonymous">Anonymous Warrior</h2><div class="profile-wallet" id="profileWallet" data-i18n="profile.notConnected">Not connected</div></div>
+          <button class="btn-secondary" style="margin-left:auto" onclick="showSettingsModal()" data-i18n="btn.settings">⚙ Settings</button>
+        </div>
+        <div class="profile-stats-grid">
+          <div class="profile-stat-card"><div class="profile-stat-value" style="color:var(--green-win)" id="profWins">0</div><div class="profile-stat-label" data-i18n="stat.wins">Wins</div></div>
+          <div class="profile-stat-card"><div class="profile-stat-value" style="color:var(--red-hot)" id="profLosses">0</div><div class="profile-stat-label" data-i18n="stat.losses">Losses</div></div>
+          <div class="profile-stat-card"><div class="profile-stat-value" style="color:var(--blue-electric)" id="profBets">0 U</div><div class="profile-stat-label" data-i18n="stat.wagered">Total Wagered</div></div>
+          <div class="profile-stat-card"><div class="profile-stat-value" style="color:var(--gold-reward)" id="profProfit">0 U</div><div class="profile-stat-label" data-i18n="stat.netProfit">Net Profit</div></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-brand">FOMO PLAYGROUND</div>
+    <p class="footer-text" data-i18n="footer.text">Decentralized PK Competition Platform • FomoPlayground</p>
+    <div class="footer-links">
+      <a href="#" class="footer-link" data-i18n="footer.whitepaper">White Paper</a>
+      <a href="#" class="footer-link" data-i18n="footer.contracts">Contracts</a>
+      <a href="#" class="footer-link" data-i18n="footer.audit">Audit</a>
+      <a href="https://bscscan.com" target="_blank" class="footer-link">BSCScan</a>
+    </div>
+  </footer>
+
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeSettingsModal()">×</button>
+      <h3 data-i18n="settings.title">⚙ Settings</h3>
+      <div class="form-group"><label class="form-label" data-i18n="label.username">Username</label><input type="text" class="form-input" id="settingsUsername" data-i18n-placeholder="placeholder.username" placeholder="Unique name"></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label" data-i18n="label.language">Language</label>
+          <select class="form-input" id="settingsLang" onchange="setLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="zh-CN">简体中文</option>
+            <option value="zh-TW">繁體中文</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label" data-i18n="label.currency">Currency</label><select class="form-input" id="settingsCurrency"><option value="USD">USD</option><option value="EUR">EUR</option><option value="CNY">CNY</option></select></div>
+      </div>
+      <button class="btn-primary" style="width:100%;justify-content:center;margin-top:1rem" onclick="saveSettings()" data-i18n="btn.save">Save</button>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toasts"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>

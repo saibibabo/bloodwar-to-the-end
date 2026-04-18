@@ -1,0 +1,21 @@
+{
+  "name": "bloodwar-to-the-end",
+  "version": "1.0.0",
+  "description": "Blood War to the End - Decentralized PK Arena on BSC",
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "test": "npx hardhat test",
+    "deploy:testnet": "npx hardhat run scripts/deploy.js --network bscTestnet",
+    "deploy:mainnet": "npx hardhat run scripts/deploy.js --network bscMainnet",
+    "backend:start": "cd backend && node server.js",
+    "backend:dev": "cd backend && npx nodemon server.js",
+    "backend:sync": "cd backend && node scripts/sync-chain.js",
+    "db:migrate": "cd backend && node scripts/migrate.js",
+    "dev": "concurrently \"npm run backend:dev\" \"npm run backend:sync\""
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.19.0",
+    "concurrently": "^8.2.0"
+  }
+}

@@ -1,0 +1,12 @@
+node_modules/
+.env
+*.log
+artifacts/
+cache/
+typechain-types/
+coverage/
+coverage.json
+mysql_data/
+nginx/ssl/
+dist/
+.DS_Store
