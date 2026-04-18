@@ -1962,6 +1962,23 @@ function animateValue(id, end) {
 // =====================================================
 // INIT
 // =====================================================
+// =====================================================
+// MOBILE NAVIGATION
+// =====================================================
+function toggleMobileMenu() {
+  document.getElementById('mobileNavDrawer').classList.toggle('open');
+  document.getElementById('mobileNavOverlay').classList.toggle('open');
+}
+function closeMobileMenu() {
+  document.getElementById('mobileNavDrawer').classList.remove('open');
+  document.getElementById('mobileNavOverlay').classList.remove('open');
+}
+
+// Wire mobile nav links same as desktop
+document.querySelectorAll('.mobile-nav-link[data-page]').forEach(link => {
+  link.addEventListener('click', () => navigateTo(link.dataset.page));
+});
+
 window.addEventListener('DOMContentLoaded', () => {
   // Apply saved language (also initialises switcher label + checkmarks)
   setLanguage(state.lang);

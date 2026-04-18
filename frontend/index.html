@@ -16,6 +16,7 @@
 
   <header class="header">
     <div class="header-left">
+      <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
       <img src="assets/logo.png" alt="Logo" class="logo-img">
       <span class="logo-text">FOMO PLAYGROUND</span>
       <nav class="nav-links">
@@ -25,6 +26,16 @@
         <a class="nav-link" data-page="leaderboard" data-i18n="nav.rankings">Rankings</a>
         <a class="nav-link" data-page="dawn" data-i18n="nav.dawn">Dawn</a>
       </nav>
+    </div>
+    <!-- Mobile nav drawer -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="closeMobileMenu()"></div>
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+      <a class="mobile-nav-link" data-page="home" data-i18n="nav.arena" onclick="closeMobileMenu()">Arena</a>
+      <a class="mobile-nav-link" data-page="rooms" data-i18n="nav.rooms" onclick="closeMobileMenu()">Rooms</a>
+      <a class="mobile-nav-link" data-page="create" data-i18n="nav.create" onclick="closeMobileMenu()">Create</a>
+      <a class="mobile-nav-link" data-page="leaderboard" data-i18n="nav.rankings" onclick="closeMobileMenu()">Rankings</a>
+      <a class="mobile-nav-link" data-page="dawn" data-i18n="nav.dawn" onclick="closeMobileMenu()">Dawn</a>
+      <a class="mobile-nav-link" data-page="profile" data-i18n="acct.viewProfile" onclick="closeMobileMenu()">Profile</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher" id="langSwitcher">
@@ -305,17 +316,44 @@
       <section class="section dawn-section">
         <h2 class="section-title" style="color:var(--gold-reward)" data-i18n="dawn.title">🌅 The Dawn Protocol</h2>
         <p class="section-subtitle" data-i18n="dawn.sub">Early bird check-in staking. Wake up, check in, earn rewards.</p>
-        <div class="dawn-card">
-          <h3 data-i18n="dawn.cardTitle">Daily Check-In Pool</h3>
-          <p style="color:var(--text-secondary)" data-i18n="dawn.window">Window: 05:00 — 08:00 UTC</p>
-          <div class="dawn-timer" id="dawnTimer">--:--:--</div>
-          <div class="dawn-info-grid">
-            <div class="dawn-info-item"><div class="dawn-info-value" id="dawnOnTime">23</div><div class="dawn-info-label" data-i18n="dawn.onTime">On-Time</div></div>
-            <div class="dawn-info-item"><div class="dawn-info-value" id="dawnLate">8</div><div class="dawn-info-label" data-i18n="dawn.late">Late</div></div>
-            <div class="dawn-info-item"><div class="dawn-info-value" id="dawnPool">8 U</div><div class="dawn-info-label" data-i18n="dawn.pool">Pool</div></div>
+
+        <div class="dawn-center-layout">
+          <!-- Check-in card -->
+          <div class="dawn-card">
+            <h3 data-i18n="dawn.cardTitle">Daily Check-In Pool</h3>
+            <p style="color:var(--text-secondary)" data-i18n="dawn.window">Window: 05:00 — 08:00 UTC</p>
+            <div class="dawn-timer" id="dawnTimer">--:--:--</div>
+            <div class="dawn-info-grid">
+              <div class="dawn-info-item"><div class="dawn-info-value" id="dawnOnTime">23</div><div class="dawn-info-label" data-i18n="dawn.onTime">On-Time</div></div>
+              <div class="dawn-info-item"><div class="dawn-info-value" id="dawnLate">8</div><div class="dawn-info-label" data-i18n="dawn.late">Late</div></div>
+              <div class="dawn-info-item"><div class="dawn-info-value" id="dawnPool">8 U</div><div class="dawn-info-label" data-i18n="dawn.pool">Pool</div></div>
+            </div>
+            <button class="btn-dawn" onclick="dawnCheckIn()" data-i18n="btn.checkin">☀ Check In (1 U)</button>
           </div>
-          <button class="btn-dawn" onclick="dawnCheckIn()" data-i18n="btn.checkin">☀ Check In (1 U)</button>
+
+          <!-- Invite & referral card — centered -->
+          <div class="dawn-invite-card">
+            <div class="dawn-invite-icon">👥</div>
+            <h3 data-i18n="dawn.rule2Title">Invite &amp; Earn</h3>
+            <p class="dawn-invite-desc" data-i18n="dawn.rule2Desc">Share your invite link. Each successful referral boosts your computing power by +5% (up to +100%), increasing your share of daily pool rewards.</p>
+            <div class="form-group" style="margin-top:1.5rem;text-align:left">
+              <label class="form-label" data-i18n="label.inviteLink">Your Invite Link</label>
+              <div style="display:flex;gap:.5rem">
+                <input type="text" class="form-input" id="inviteLinkDisplay" readonly placeholder="Connect wallet to get your link">
+                <button class="btn-secondary" onclick="copyInviteLink()" style="white-space:nowrap;padding:.5rem 1rem" data-i18n="btn.copy">Copy</button>
+              </div>
+            </div>
+            <div class="form-group" style="text-align:left">
+              <label class="form-label" data-i18n="label.enterInvite">Enter Invite Code</label>
+              <div style="display:flex;gap:.5rem">
+                <input type="text" class="form-input" id="inviteCodeInput" data-i18n-placeholder="placeholder.inviteCode" placeholder="Code from friend">
+                <button class="btn-primary" onclick="applyInviteCode()" style="white-space:nowrap;padding:.5rem 1.5rem" data-i18n="btn.apply">Apply</button>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- Rules grid -->
         <div class="dawn-rules-grid">
           <div class="dawn-rule-card">
             <div class="dawn-rule-icon">☀</div>
@@ -332,16 +370,6 @@
             <h4 data-i18n="dawn.rule3Title">Pool Distribution</h4>
             <p data-i18n="dawn.rule3Desc">The late-fee pool is split among on-time check-ins weighted by computing power. Higher computing power = larger share. Unclaimed rewards roll to next day.</p>
           </div>
-        </div>
-        <div style="max-width:600px;margin:3rem auto">
-          <div class="form-group">
-            <label class="form-label" data-i18n="label.inviteLink">Your Invite Link</label>
-            <div style="display:flex;gap:.5rem">
-              <input type="text" class="form-input" id="inviteLinkDisplay" readonly placeholder="Connect wallet to get your link">
-              <button class="btn-secondary" onclick="copyInviteLink()" style="white-space:nowrap;padding:.5rem 1rem" data-i18n="btn.copy">Copy</button>
-            </div>
-          </div>
-          <div class="form-group"><label class="form-label" data-i18n="label.enterInvite">Enter Invite Code</label><div style="display:flex;gap:.5rem"><input type="text" class="form-input" id="inviteCodeInput" data-i18n-placeholder="placeholder.inviteCode" placeholder="Code from friend"><button class="btn-primary" onclick="applyInviteCode()" style="white-space:nowrap;padding:.5rem 1.5rem" data-i18n="btn.apply">Apply</button></div></div>
         </div>
       </section>
     </div>

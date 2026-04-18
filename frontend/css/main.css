@@ -121,6 +121,11 @@ select.form-input{appearance:none;cursor:pointer}
 .dawn-info-label{font-size:.75rem;color:var(--text-dim);margin-top:.25rem}
 .btn-dawn{font-family:var(--font-display);font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:1rem 3rem;border:none;border-radius:10px;cursor:pointer;background:linear-gradient(135deg,var(--gold-reward),#e6a800);color:var(--bg-void);box-shadow:0 4px 30px var(--gold-glow);transition:all .3s;margin-top:1rem}
 .btn-dawn:hover{transform:translateY(-2px);box-shadow:0 8px 40px var(--gold-glow)}
+.dawn-center-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:900px;margin:0 auto 3rem;align-items:start}
+.dawn-invite-card{background:var(--bg-card);border:1px solid rgba(255,215,0,.15);border-radius:20px;padding:2rem;text-align:center}
+.dawn-invite-icon{font-size:2.5rem;margin-bottom:.75rem}
+.dawn-invite-card h3{font-family:var(--font-display);font-size:1.1rem;font-weight:800;color:var(--gold-reward);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.06em}
+.dawn-invite-desc{font-size:.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem}
 .dawn-rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:900px;margin:3rem auto 0}
 .dawn-rule-card{background:var(--bg-card);border:1px solid rgba(255,215,0,.12);border-radius:16px;padding:1.5rem;text-align:center}
 .dawn-rule-icon{font-size:2rem;margin-bottom:.75rem}
@@ -357,16 +362,66 @@ select.form-input{appearance:none;cursor:pointer}
 .fee-info-row.fee-info-creator .fee-info-pct{color:var(--green-win)}
 .fee-info-desc{font-size:.82rem;color:var(--text-secondary);line-height:1.5}
 
+/* ===== MOBILE NAV HAMBURGER ===== */
+.mobile-menu-btn{display:none;background:none;border:1px solid var(--border-dim);color:var(--text-primary);font-size:1.2rem;padding:.4rem .7rem;border-radius:8px;cursor:pointer;transition:all .2s;line-height:1}
+.mobile-menu-btn:hover{border-color:var(--blue-electric);color:var(--blue-electric)}
+.mobile-nav-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5)}
+.mobile-nav-overlay.open{display:block}
+.mobile-nav-drawer{position:fixed;top:0;left:-280px;width:260px;height:100vh;z-index:600;background:var(--bg-panel);border-right:1px solid var(--border-dim);padding:5rem 1.5rem 2rem;display:flex;flex-direction:column;gap:.5rem;transition:left .3s ease}
+.mobile-nav-drawer.open{left:0}
+.mobile-nav-link{font-family:var(--font-display);font-size:.85rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.85rem 1rem;border-radius:10px;color:var(--text-secondary);cursor:pointer;transition:all .2s;border:none;background:none;text-align:left;text-decoration:none;display:block}
+.mobile-nav-link:hover,.mobile-nav-link.active{color:var(--text-primary);background:rgba(59,59,240,.12);border-left:3px solid var(--blue-electric)}
+
 /* ===== RESPONSIVE OVERRIDES ===== */
-@media(max-width:900px){.create-layout{grid-template-columns:1fr}.fee-panel{position:static}}
+@media(max-width:900px){.create-layout{grid-template-columns:1fr}.fee-panel{position:static}.dawn-center-layout{grid-template-columns:1fr}}
 @media(max-width:768px){
+  .mobile-menu-btn{display:block}
+  .nav-links{display:none}
+  .header{padding:0 1rem}
+  .header-left{gap:.75rem}
+  .logo-text{font-size:.75rem}
+  .social-icon{display:none}
+  .hero-stats{flex-direction:column;gap:1.5rem}
+  .battle-vs{flex-direction:column;gap:1.5rem}
+  .bet-teams-display{grid-template-columns:1fr}
+  .rooms-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .dawn-info-grid{grid-template-columns:1fr}
+  .dawn-center-layout{grid-template-columns:1fr;gap:1.5rem}
+  .dawn-card{padding:2rem 1.25rem}
+  .dawn-timer{font-size:2.2rem}
+  .dawn-rules-grid{grid-template-columns:1fr;gap:1rem}
+  .profile-header{flex-direction:column;text-align:center;padding:1.5rem}
+  .profile-header .btn-secondary{margin-left:0!important}
+  .profile-social-row{justify-content:center}
+  .profile-stats-grid{grid-template-columns:1fr 1fr}
   .teams-grid.teams-2,.teams-grid.teams-4,.teams-grid.teams-many{grid-template-columns:1fr 1fr}
   .stage-countdown{font-size:1.4rem}
   .bet-room-header{flex-direction:column;align-items:flex-start}
   .stage-bar{flex-wrap:wrap;gap:.75rem;justify-content:center}
   .lang-current-label{display:none}
   .account-dropdown{width:260px;right:-10px}
+  .modal{padding:1.5rem;max-height:90vh;overflow-y:auto}
+  .lb-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .lb-table{min-width:500px}
+  .section{padding:3rem 1rem}
+  .section-title{font-size:1.5rem}
+  .hero-title{font-size:2.2rem}
+  .hero-sub{font-size:.9rem}
+  .btn-wallet{padding:.5rem .9rem;font-size:.7rem}
+  .acct-avatar{width:36px;height:36px;font-size:.85rem}
+  .toast-container{right:.5rem;left:.5rem}
+  .toast{max-width:100%}
+  .avatar-grid{grid-template-columns:repeat(5,1fr)}
+  .user-profile-modal-header{flex-wrap:wrap}
 }
 @media(max-width:480px){
   .teams-grid.teams-2,.teams-grid.teams-4,.teams-grid.teams-many{grid-template-columns:1fr}
+  .profile-stats-grid{grid-template-columns:1fr}
+  .dawn-timer{font-size:1.8rem}
+  .hero-title{font-size:1.8rem}
+  .header-right{gap:.4rem}
+  .btn-wallet{max-width:120px;overflow:hidden;text-overflow:ellipsis}
+  .lb-table{min-width:420px}
+  .modal{border-radius:14px}
 }
